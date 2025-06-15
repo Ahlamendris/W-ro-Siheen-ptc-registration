@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>W/RO Siheen PTC College Student Registration</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    color: #1e293b;
+  }
+  .container {
+    background: #ffffffcc;
+    backdrop-filter: saturate(180%) blur(15px);
+    border-radius: 12px;
+    padding: 32px 40px;
+    max-width: 420px;
+    width: 100%;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 0.1);
+  }
+  h1 {
+    font-weight: 700;
+    margin-bottom: 24px;
+    font-size: 1.8rem;
+    text-align: center;
+    color: #0369a1;
+  }
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    margin-top: 16px;
+    font-size: 1rem;
+  }
+  input[type="text"],
+  select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid #94a3b8;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  input[type="text"]:focus,
+  select:focus {
+    border-color: #0284c7;
+    outline: none;
+  }
+  .radio-group {
+    display: flex;
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .radio-group label {
+    font-weight: normal;
+    margin-top: 0;
+  }
+  .btn-group {
+    margin-top: 28px;
+    display: flex;
+    gap: 16px;
+  }
+  button {
+    flex: 1;
+    font-weight: 700;
+    padding: 14px 0;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none;
+  }
+  button[type="submit"] {
+    background: #0369a1;
+    color: white;
+  }
+  button[type="submit"]:hover {
+    background: #0c4a6e;
+  }
+  button[type="button"] {
+    background: #a1a1aa;
+    color: white;
+  }
+  button[type="button"]:hover {
+    background: #52525b;
+  }
+  .message {
+    margin-top: 20px;
+    font-weight: 600;
+    text-align: center;
+    color: #15803d;
+  }
+</style>
+</head>
+<body>
+  <div class="container" role="main" aria-label="Student Registration Form">
+    <h1>W/RO Siheen PTC College</h1>
+    <form id="registrationForm" novalidate>
+      <label for="firstName">First Name</label>
+      <input type="text" id="firstName" name="firstName" required aria-required="true" autocomplete="given-name" />
+
+      <label for="secondName">Second Name</label>
+      <input type="text" id="secondName" name="secondName" required aria-required="true" autocomplete="additional-name" />
+
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" name="lastName" required aria-required="true" autocomplete="family-name" />
+
+      <label>Sex</label>
+      <div class="radio-group" role="radiogroup" aria-required="true">
+        <label for="sexMale"><input type="radio" id="sexMale" name="sex" value="Male" required /> Male</label>
+        <label for="sexFemale"><input type="radio" id="sexFemale" name="sex" value="Female" required /> Female</label>
+      </div>
+
+      <label for="department">Department</label>
+      <select id="department" name="department" required aria-required="true">
+        <option value="" disabled selected>Select Department</option>
+        <option value="Auto">Auto</option>
+        <option value="WDDBA">WDDBA</option>
+        <option value="Electricity">Electricity</option>
+        <option value="Garment">Garment</option>
+        <option value="Textile">Textile</option>
+      </select>
+
+      <div class="btn-group">
+        <button type="submit" aria-label="Register">Register</button>
+        <button type="button" id="cancelBtn" aria-label="Cancel Registration">Cancel</button>
+      </div>
+    </form>
+    <div id="message" class="message" role="alert" aria-live="polite"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('registrationForm');
+    const message = document.getElementById('message');
+    const cancelBtn = document.getElementById('cancelBtn');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      if (!form.checkValidity()) {
+        message.textContent = 'Please fill out all required fields correctly.';
+        message.style.color = '#b91c1c'; // red
+        return;
+      }
+
+      const firstName = form.firstName.value.trim();
+      const secondName = form.secondName.value.trim();
+      const lastName = form.lastName.value.trim();
+      const sex = form.sex.value;
+      const department = form.department.value;
+
+      // Save data (simulate registration) - here simply show a confirmation message
+      message.style.color = '#15803d'; // green
+      message.textContent = `Student ${firstName} ${secondName} ${lastName} (${sex}) registered in ${department} department.`;
+
+      form.reset();
+      form.firstName.focus();
+    });
+
+    cancelBtn.addEventListener('click', () => {
+      form.reset();
+      message.textContent = '';
+      form.firstName.focus();
+    });
+  </script>
+</body>
+</html>
+
