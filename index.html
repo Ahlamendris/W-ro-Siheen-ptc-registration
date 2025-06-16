@@ -176,6 +176,22 @@
       form.firstName.focus();
     });
   </script>
+  def register_user(username, password):
+    # Assume we have a function to save the user data
+    success = save_user_data(username, password)
+    
+    if success:
+        print("Registration successful! Welcome, {}.".format(username))
+    else:
+        print("Registration failed. Please try again.")
+
+def save_user_data(username, password):
+    # Logic to save user data (e.g., to a database)
+    # Return True if successful, False otherwise
+    return True  # Placeholder for actual implementation
+
+# Example usage
+register_user("player1", "securepassword")
 </body>
 </html>
 
